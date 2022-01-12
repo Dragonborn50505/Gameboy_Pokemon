@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj": {}
+    "C:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj": {}
   },
   "projects": {
-    "c:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj": {
+    "C:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj",
+        "projectUniqueName": "C:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj",
         "projectName": "Gameboy_Pokemon",
-        "projectPath": "c:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj",
+        "projectPath": "C:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\Gameboy_Pokemon.csproj",
         "packagesPath": "C:\\Users\\allinggard.vincent\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\obj\\",
+        "outputPath": "C:\\Users\\allinggard.vincent\\Desktop\\Programering\\Gameboy_Pokemon\\Gameboy_Pokemon\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allinggard.vincent\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Raylib-cs": {
+              "target": "Package",
+              "version": "[3.7.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
