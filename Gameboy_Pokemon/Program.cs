@@ -10,19 +10,20 @@ string level = "lobby";
 
 
 while (!Raylib.WindowShouldClose())
-{   Raylib.BeginDrawing();
-    
-        if (level == "lobby")
-        {
-            Raylib.ClearBackground(Color.YELLOW);
-            
-        }
+{
+    Raylib.BeginDrawing();
 
-        if (level == "fight")
-        {
-            Raylib.ClearBackground(Color.GRAY);
-        }
-    
-    
+    if (level == "lobby")
+    {
+        Raylib.ClearBackground(Color.YELLOW);
+
+    }
+
+    if (level == "fight")
+    {
+        Raylib.ClearBackground(Color.GRAY);
+    }
+
+
     Raylib.EndDrawing();
 }
