@@ -44,7 +44,7 @@ while (!Raylib.WindowShouldClose())
 
     if (level == "start" || level == "shop")
     {
-        playerRect = CheckMovement(playerRect, speed);
+        playerRect = CheckMovement();
 
         movement = ReadMovement(speed);
         playerRect.x += movement.X;
@@ -77,7 +77,7 @@ while (!Raylib.WindowShouldClose())
     }
 
 
-    if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "start")
+    if (Raylib.CheckCollisionRecs(, doorRect) && level == "start")
     {
         level = "outside";
         playerRect.x = 300;
@@ -170,7 +170,7 @@ static Vector2 ReadMovement(float speed)
 }
 
 
-static void CheckMovement{
+static void CheckMovement(){
     
 }
 
