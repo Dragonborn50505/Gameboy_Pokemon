@@ -11,10 +11,14 @@ float speed = 6f;
 
 
 Rectangle playerRect = new Rectangle(100, 100, 50, 50);
-Rectangle doorRect = new Rectangle(380, 560, 40, 40);
+Rectangle doorRect = new Rectangle(260, 560, 40, 40);
+Rectangle doorRect2 = new Rectangle(300, 560, 40, 40);
+Rectangle bossRect = new Rectangle(700, 70, 40, 40);
 Texture2D winterBackground = Raylib.LoadTexture("Vinterprojektet.png");
 
 
+float time = 0;
+int fighers_hp = 100;
 
 
 string level = "start";
@@ -30,8 +34,18 @@ while (!Raylib.WindowShouldClose())
     undoX = false;
     undoY = false;
 
-    if (level == "start" || level == "outside")
+    time += Raylib.GetFrameTime();
+
+    if (time > 60 && fighers_hp < 100){
+        fighers_hp ++;
+        time = 0;
+    }
+    
+
+    if (level == "start" || level == "shop")
     {
+        playerRect = CheckMovement(playerRect, speed);
+
         movement = ReadMovement(speed);
         playerRect.x += movement.X;
         playerRect.y += movement.Y;
@@ -45,13 +59,68 @@ while (!Raylib.WindowShouldClose())
         if (playerRect.y < 100 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
         { undoY = true; }
     }
-    if (Raylib.CheckCollisionRecs(playerRect, doorRect))
+
+    else if (level == "outside")
+    {
+        movement = ReadMovement(speed);
+        playerRect.x += movement.X;
+        playerRect.y += movement.Y;
+
+        if (playerRect.x < 0 || playerRect.width > Raylib.GetScreenWidth())
+        { undoX = true; }
+        if (playerRect.y > 400 || playerRect.width > Raylib.GetScreenWidth())
+        { undoY = true; }
+        if (playerRect.x < 280 || playerRect.x + playerRect.width > Raylib.GetScreenWidth())
+        { undoX = true; }
+        if (playerRect.y < 100 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+        { undoY = true; }
+    }
+
+
+    if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "start")
     {
         level = "outside";
-        playerRect.x = 200;
+        playerRect.x = 300;
         playerRect.y = 140;
-        doorRect.x = 200;
+        doorRect.x = 260;
         doorRect.y = 70;
+
+        doorRect2.x = 500;
+        doorRect2.y = 70;
+
+    }
+
+    else if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "outside")
+    {
+        level = "start";
+        playerRect.x = 300;
+        playerRect.y = 500;
+        doorRect.x = 260;
+        doorRect.y = 560;
+        bossRect.x = 700;
+        bossRect.y = 70;
+    }
+
+    else if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "outside")
+    {
+        level = "shop";
+        playerRect.x = 500;
+        playerRect.y = 500;
+        doorRect2.x = 500;
+        doorRect2.y = 560;
+    }
+
+    if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "shop")
+    {
+        level = "outside";
+        playerRect.x = 500;
+        playerRect.y = 140;
+        doorRect.x = 260;
+        doorRect.y = 70;
+
+        doorRect2.x = 500;
+        doorRect2.y = 70;
+
     }
 
 
@@ -65,16 +134,24 @@ while (!Raylib.WindowShouldClose())
         Raylib.ClearBackground(Color.BLUE);
         Raylib.DrawRectangleRec(playerRect, Color.BROWN);
         Raylib.DrawRectangleRec(doorRect, Color.BLACK);
+        Raylib.DrawRectangleRec(bossRect, Color.PURPLE);
     }
 
     else if (level == "outside")
     {
         Raylib.ClearBackground(Color.PINK);
         Raylib.DrawTexture(winterBackground, 0, 0, Color.WHITE);
-
         Raylib.DrawRectangleRec(playerRect, Color.BROWN);
+        Raylib.DrawRectangleRec(doorRect, Color.BLACK);
+        Raylib.DrawRectangleRec(doorRect2, Color.BLACK);
     }
-    Raylib.DrawRectangleRec(doorRect, Color.BLACK);
+
+    else if (level == "shop")
+    {
+        Raylib.ClearBackground(Color.RED);
+        Raylib.DrawRectangleRec(playerRect, Color.BROWN);
+        Raylib.DrawRectangleRec(doorRect2, Color.BLACK);
+    }
 
 
     Raylib.EndDrawing();
@@ -93,7 +170,9 @@ static Vector2 ReadMovement(float speed)
 }
 
 
-
+static void CheckMovement{
+    
+}
 
 
 
