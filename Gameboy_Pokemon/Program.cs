@@ -14,11 +14,14 @@ Rectangle playerRect = new Rectangle(100, 100, 50, 50);
 Rectangle doorRect = new Rectangle(260, 560, 40, 40);
 Rectangle doorRect2 = new Rectangle(300, 560, 40, 40);
 Rectangle bossRect = new Rectangle(700, 70, 40, 40);
+Rectangle lineHorisontelBossFight = new Rectangle(0, 400, 800, 5);
+Rectangle lineVerticalBossFight = new Rectangle(600, 400, 5, 200);
 Texture2D winterBackground = Raylib.LoadTexture("Vinterprojektet.png");
 
 
 float time = 0;
-int fighers_hp = 100;
+int fightersHp = 100;
+float blackAndWhite = 0;
 
 
 string level = "start";
@@ -36,15 +39,19 @@ while (!Raylib.WindowShouldClose())
 
     time += Raylib.GetFrameTime();
 
-    if (time > 60 && fighers_hp < 100){
-        fighers_hp ++;
+
+    if (time > 60 && fightersHp < 100 && level != "bossfight")
+    {
+        fightersHp++;
         time = 0;
     }
-    
+
+
+
 
     if (level == "start" || level == "shop")
     {
-        playerRect = CheckMovement();
+        // playerRect = CheckMovement();
 
         movement = ReadMovement(speed);
         playerRect.x += movement.X;
@@ -62,6 +69,7 @@ while (!Raylib.WindowShouldClose())
 
     else if (level == "outside")
     {
+
         movement = ReadMovement(speed);
         playerRect.x += movement.X;
         playerRect.y += movement.Y;
@@ -77,7 +85,7 @@ while (!Raylib.WindowShouldClose())
     }
 
 
-    if (Raylib.CheckCollisionRecs(, doorRect) && level == "start")
+    if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "start")
     {
         level = "outside";
         playerRect.x = 300;
@@ -123,6 +131,13 @@ while (!Raylib.WindowShouldClose())
 
     }
 
+    if (Raylib.CheckCollisionRecs(playerRect, bossRect) && level == "start")
+    {
+        level = "bossfight";
+
+    }
+
+
 
     if (undoX == true) playerRect.x -= movement.X;
     if (undoY == true) playerRect.y -= movement.Y;
@@ -153,6 +168,29 @@ while (!Raylib.WindowShouldClose())
         Raylib.DrawRectangleRec(doorRect2, Color.BLACK);
     }
 
+    if (level == "bossfight" && blackAndWhite >= 120)
+    {
+        Raylib.ClearBackground(Color.YELLOW);
+        Raylib.DrawText("ai name", 50, 50, 40, Color.LIGHTGRAY);
+        Raylib.DrawText("ai hp", 50, 100, 40, Color.LIGHTGRAY);
+        Raylib.DrawText("name", 650, 450, 40, Color.LIGHTGRAY);
+        Raylib.DrawText($"{fightersHp}", 650, 500, 40, Color.LIGHTGRAY);
+        Raylib.DrawRectangleRec(lineHorisontelBossFight, Color.BLACK);
+        Raylib.DrawRectangleRec(lineVerticalBossFight, Color.BLACK);
+    }
+    if (level == "bossfight" && blackAndWhite < 120)
+    {
+        if ((blackAndWhite / 10) % 2 == 0)
+        {
+            Raylib.ClearBackground(Color.BLACK);
+        }
+        else
+        {
+            Raylib.ClearBackground(Color.WHITE);
+        }
+        blackAndWhite++;
+    }
+
 
     Raylib.EndDrawing();
 }
@@ -170,9 +208,9 @@ static Vector2 ReadMovement(float speed)
 }
 
 
-static void CheckMovement(){
-    
-}
+//static void CheckMovement(){
+
+//}
 
 
 
