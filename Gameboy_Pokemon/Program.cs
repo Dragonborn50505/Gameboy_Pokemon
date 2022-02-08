@@ -209,7 +209,7 @@ while (!Raylib.WindowShouldClose())
         // 
         // if (Raylib.CheckCollisionPointRec(mousePos, ) && )
         // Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)
-        if (Raylib.CheckCollisionPointRec(mousePos, headbutt) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart = "no")
+        if (Raylib.CheckCollisionPointRec(mousePos, headbutt) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart == "no")
     {
             {
                 int HitOrMissName = generator.Next(1, 11);
@@ -228,7 +228,7 @@ while (!Raylib.WindowShouldClose())
             }
         }
 
-        if (Raylib.CheckCollisionPointRec(mousePos, kick) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart = "no"){
+        if (Raylib.CheckCollisionPointRec(mousePos, kick) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart == "no"){
              int KickOrMissName = generator.Next(1, 5);
 
             if (KickOrMissName == 1)
@@ -243,7 +243,7 @@ while (!Raylib.WindowShouldClose())
                 aiStart = "yes";
             }
         }
-         if (Raylib.CheckCollisionPointRec(mousePos, runAway) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart = "no"){
+         if (Raylib.CheckCollisionPointRec(mousePos, runAway) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && aiStart == "no"){
             level = "start";}
 
         while (aiStart == "yes") {
