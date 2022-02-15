@@ -65,7 +65,9 @@ while (!Raylib.WindowShouldClose())
     time += Raylib.GetFrameTime();
 
 
-    if (time > 60 && fightersHp < 100 && level != "bossfight")
+
+//nice
+    if (time > 60 && fightersHp < 100 && level != "bossfight") // heal gighter if you in combat
     {
         fightersHp++;
         time = 0;
@@ -74,7 +76,7 @@ while (!Raylib.WindowShouldClose())
 
 
 
-    if (level == "start" || level == "shop")
+    if (level == "start" || level == "shop") // borders for indors where size is the same
     {
         // playerRect = CheckMovement();
 
@@ -92,7 +94,7 @@ while (!Raylib.WindowShouldClose())
         { undoY = true; }
     }
 
-    else if (level == "outside")
+    else if (level == "outside") // borders for outside
     {
 
         movement = ReadMovement(speed);
@@ -355,7 +357,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (level == "bossfight" && blackAndWhite < 120) //My favorite part of the code, beteween being a even and uneven number it changes back and fourth from black to white to stimulate playing pokemone on gameboye
     {
-        if ((blackAndWhite / 10) % 2 == 0)
+        if ((blackAndWhite / 10) % 2 == 0) //if anything is left that cant be devided in 2 and stay integer (heltal)
         {
             Raylib.ClearBackground(Color.BLACK);
         }
@@ -378,7 +380,7 @@ if (potionHp == "active" && hp_ai <= 0){ //Was planed to give the player a healt
 }
 
 
-static Vector2 ReadMovement(float speed)
+static Vector2 ReadMovement(float speed) //förflytning
 {
     Vector2 movement = new Vector2();
     if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) movement.Y = -speed;
