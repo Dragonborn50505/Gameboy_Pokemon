@@ -29,10 +29,14 @@ Raylib.DrawText("Use headbutt", 50, 500, 40, Color.LIGHTGRAY);
 Raylib.DrawText("Use Kick", 50, 550, 40, Color.LIGHTGRAY);
 Raylib.DrawText("Run Away", 400, 450, 40, Color.BLACK);
 
-Rectangle headbutt = new Rectangle(50, 500, 40, 40);
-Rectangle kick = new Rectangle(50, 550, 40, 40);
-Rectangle runAway = new Rectangle(400, 450, 40, 40);
+Rectangle headbutt = new Rectangle(50, 500, 250, 40);
+Rectangle kick = new Rectangle(50, 550, 200, 40);
+Rectangle runAway = new Rectangle(400, 450, 200, 40);
 
+
+//lol
+//Rectangle test = new Rectangle(50, 500, 200, 40);
+//lol
 Rectangle lineHorisontelBossFight = new Rectangle(0, 400, 800, 5);
 Rectangle lineVerticalBossFight = new Rectangle(600, 400, 5, 200);
 Texture2D winterBackground = Raylib.LoadTexture("Vinterprojektet.png");
@@ -216,7 +220,7 @@ while (!Raylib.WindowShouldClose())
 
         if (level == "bossfight" && blackAndWhite >= 120 && fight == "hasNotHappend")
         {
-            Vector2 mousePos = Raylib.GetMousePosition();
+            Vector2 mousePos = Raylib.GetMousePosition(); // ger musen en positioon
             Raylib.ClearBackground(Color.YELLOW);
             Raylib.DrawText("ai name", 50, 50, 40, Color.LIGHTGRAY);
             Raylib.DrawText($"{hp_ai}", 50, 100, 40, Color.LIGHTGRAY);
@@ -229,12 +233,15 @@ while (!Raylib.WindowShouldClose())
             Raylib.DrawRectangleRec(lineHorisontelBossFight, Color.BLACK);
             Raylib.DrawRectangleRec(lineVerticalBossFight, Color.BLACK);
 
+
+            //lol
+            //Raylib.DrawRectangleRec(test, Color.BLACK); Testar knapparna för attack osv
+            //lol
+
             Raylib.DrawRectangleRec(bossFighter, Color.RED);
             Raylib.DrawRectangleRec(fighter, Color.BLUE);
                                                                                                         
-            // 
-            // if (Raylib.CheckCollisionPointRec(mousePos, ) && )
-            // Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)
+            
             if (Raylib.CheckCollisionPointRec(mousePos, headbutt) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && turn == "player" && playerTimer == 0)
             {
 
