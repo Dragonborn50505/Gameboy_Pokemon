@@ -14,6 +14,8 @@ int playerTimer = 0;
 int enemyTimer = 0;
 string potionHp = "inactive";
 
+
+//Generate figures 
 Rectangle playerRect = new Rectangle(100, 100, 50, 50);
 Rectangle doorRect = new Rectangle(260, 560, 40, 40);
 Rectangle doorRect2 = new Rectangle(300, 560, 40, 40);
@@ -24,7 +26,7 @@ Rectangle fighter = new Rectangle(100, 350, 40, 40);
 Rectangle shopkeeper = new Rectangle(600, 100, 40, 40);
 Rectangle potion = new Rectangle(50, 100, 40, 40);
 
-
+//Text for boss battle
 Raylib.DrawText("Use headbutt", 50, 500, 40, Color.LIGHTGRAY);
 Raylib.DrawText("Use Kick", 50, 550, 40, Color.LIGHTGRAY);
 Raylib.DrawText("Run Away", 400, 450, 40, Color.BLACK);
@@ -41,7 +43,7 @@ Rectangle lineHorisontelBossFight = new Rectangle(0, 400, 800, 5);
 Rectangle lineVerticalBossFight = new Rectangle(600, 400, 5, 200);
 Texture2D winterBackground = Raylib.LoadTexture("Vinterprojektet.png");
 
-
+//hp and time for bossfight
 float time = 0;
 int fightersHp = 100;
 int hp_ai = 100;
@@ -55,16 +57,14 @@ bool undoY = false;
 
 
 
-Vector2 movement = new Vector2();
+Vector2 movement = new Vector2(); 
 
-while (!Raylib.WindowShouldClose())
+while (!Raylib.WindowShouldClose()) //the game
 {
     undoX = false;
     undoY = false;
 
     time += Raylib.GetFrameTime();
-
-
 
 //nice
     if (time > 60 && fightersHp < 100 && level != "bossfight") // heal gighter if you in combat
@@ -76,7 +76,7 @@ while (!Raylib.WindowShouldClose())
 
 
 
-    if (level == "start" || level == "shop") // borders for indors where size is the same
+    if (level == "start" || level == "shop") // borders for indors where size is the same & player movement
     {
         // playerRect = CheckMovement();
 
@@ -94,7 +94,7 @@ while (!Raylib.WindowShouldClose())
         { undoY = true; }
     }
 
-    else if (level == "outside") // borders for outside
+    else if (level == "outside") // borders for outside & player movement
     {
 
         movement = ReadMovement(speed);
@@ -112,7 +112,7 @@ while (!Raylib.WindowShouldClose())
     }
 
 
-    if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "start")
+    if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "start") //trigger for dorr to from start to outside
     {
         level = "outside";
         playerRect.x = 300;
@@ -125,7 +125,7 @@ while (!Raylib.WindowShouldClose())
 
     }
 
-    else if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "outside")
+    else if (Raylib.CheckCollisionRecs(playerRect, doorRect) && level == "outside") //dorr from outside to start
     {
         level = "start";
         playerRect.x = 300;
@@ -136,7 +136,7 @@ while (!Raylib.WindowShouldClose())
         bossRect.y = 70;
     }
 
-    else if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "outside")
+    else if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "outside") //dorr to shop
     {
         level = "shop";
         playerRect.x = 500;
@@ -145,7 +145,7 @@ while (!Raylib.WindowShouldClose())
         doorRect2.y = 560;
     }
 
-    if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "shop")
+    if (Raylib.CheckCollisionRecs(playerRect, doorRect2) && level == "shop") //dorr from shop outside
     {
         level = "outside";
         playerRect.x = 500;
@@ -158,7 +158,7 @@ while (!Raylib.WindowShouldClose())
 
     }
 
-    if (Raylib.CheckCollisionRecs(playerRect, bossRect) && level == "start")
+    if (Raylib.CheckCollisionRecs(playerRect, bossRect) && level == "start") //trigger bossfight
     {
         level = "bossfight";
 
@@ -169,7 +169,7 @@ while (!Raylib.WindowShouldClose())
     if (undoX == true) playerRect.x -= movement.X;
     if (undoY == true) playerRect.y -= movement.Y;
 
-    Raylib.BeginDrawing();
+    Raylib.BeginDrawing(); //place all generated figures
     {
 
         if (level == "start")
@@ -199,31 +199,31 @@ while (!Raylib.WindowShouldClose())
             Vector2 mousePos = Raylib.GetMousePosition();
             if (Raylib.CheckCollisionPointRec(mousePos, shopkeeper) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
             {
-                level = "buy";
+                level = "buy"; //my try to make a shop
             }
         }
 
         else if (level == "buy")
         {
             Raylib.DrawText("potion", 50, 100, 40, Color.LIGHTGRAY);
-            potionHp = "active";
+            potionHp = "active"; //Item to buy
             level =  "shop";
         }
 
-        else if (level == "victory"){
+        else if (level == "victory"){ //victory
             Raylib.ClearBackground(Color.BLUE);
             Raylib.DrawText("You Won!", 400, 280, 40, Color.BLACK);
         }
 
-        else if (level == "game over"){
+        else if (level == "game over"){ //game over
             Raylib.ClearBackground(Color.RED);
             Raylib.DrawText("You lost",  400, 280, 40, Color.BLACK);
         }
 
-        if (level == "bossfight" && blackAndWhite >= 120 && fight == "hasNotHappend")
+        if (level == "bossfight" && blackAndWhite >= 120 && fight == "hasNotHappend") //bossfight after starting sequence
         {
-            Vector2 mousePos = Raylib.GetMousePosition(); // ger musen en positioon
-            Raylib.ClearBackground(Color.YELLOW);
+            Vector2 mousePos = Raylib.GetMousePosition(); // give mouse a position
+            Raylib.ClearBackground(Color.YELLOW); //drawing out all figures
             Raylib.DrawText("ai name", 50, 50, 40, Color.LIGHTGRAY);
             Raylib.DrawText($"{hp_ai}", 50, 100, 40, Color.LIGHTGRAY);
             Raylib.DrawText("name", 650, 450, 40, Color.LIGHTGRAY);
@@ -240,12 +240,12 @@ while (!Raylib.WindowShouldClose())
             //Raylib.DrawRectangleRec(test, Color.BLACK); Testar knapparna för attack osv
             //lol
 
-            Raylib.DrawRectangleRec(bossFighter, Color.RED);
+            Raylib.DrawRectangleRec(bossFighter, Color.RED); //player´s and the bosses fighers
             Raylib.DrawRectangleRec(fighter, Color.BLUE);
                                                                                                         
             
             if (Raylib.CheckCollisionPointRec(mousePos, headbutt) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) && turn == "player" && playerTimer == 0)
-            {
+            {//player fight generator
 
                 int HitOrMissName = generator.Next(1, 11);
 
@@ -286,9 +286,15 @@ while (!Raylib.WindowShouldClose())
             if (Raylib.CheckCollisionPointRec(mousePos, runAway) && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
             {
                 level = "start";
+                playerRect.x = 300;
+               playerRect.y = 500;
+               doorRect.x = 260;
+               doorRect.y = 560;
+              bossRect.x = 700;
+              bossRect.y = 70;
             }
 
-            while (turn == "enemy" && enemyTimer == 0)
+            while (turn == "enemy" && enemyTimer == 0) 
             {
                 //fights back'
         
@@ -337,12 +343,12 @@ while (!Raylib.WindowShouldClose())
             if (enemyTimer > 0) enemyTimer--;
 
 
-            if (hp_ai <= 0)
+            if (hp_ai <= 0) //trigger victory if fight happend
             {
                 fight = "happend";
                 level = "victory";
             }
-            if (fightersHp <= 0)
+            if (fightersHp <= 0) //trigger game over
             {
                 fight = "happend";
                 level = "game over";
@@ -380,7 +386,7 @@ if (potionHp == "active" && hp_ai <= 0){ //Was planed to give the player a healt
 }
 
 
-static Vector2 ReadMovement(float speed) //förflytning
+static Vector2 ReadMovement(float speed) //movement
 {
     Vector2 movement = new Vector2();
     if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) movement.Y = -speed;
