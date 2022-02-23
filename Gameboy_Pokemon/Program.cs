@@ -66,7 +66,7 @@ while (!Raylib.WindowShouldClose()) //the game
 
     time += Raylib.GetFrameTime();
 
-//nice
+//  <------ nice
     if (time > 60 && fightersHp < 100 && level != "bossfight") // heal gighter if you in combat
     {
         fightersHp++;
